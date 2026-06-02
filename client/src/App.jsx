@@ -10,7 +10,9 @@ import RemoveBackground from './pages/RemoveBackground'
 import RemoveObject from './pages/RemoveObject'
 import Community from './pages/Community'
 
+
 const App = () => {
+
   return (
     <div>
       <Routes>
