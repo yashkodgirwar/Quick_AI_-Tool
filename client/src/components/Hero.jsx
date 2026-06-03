@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
@@ -44,10 +44,10 @@ const Hero = () => {
        
 
       </div>
-     <div className='flex items-center gap-3 mt-8 mx-auto text-grey-600>'>
-<img src={assets. user_group} alt="" className='h-10'/> Trusted by<span className='font-bold'>10k+</span> people
-people
-</div>
+     <div className='flex items-center gap-3 mt-8 mx-auto text-gray-600'>
+       <img src={assets.user_group} alt="User group" className='h-10'/> 
+       Trusted by <span className='font-bold'>10k+</span> people
+     </div>
 
     </div>
   );
