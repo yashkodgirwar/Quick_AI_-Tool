@@ -37,6 +37,7 @@ const Sidebar = () => {
               src={user.imageUrl}
               alt="User avatar"
               className="w-14 rounded-full mx-auto"
+              onClick={openUserProfile}
             />
             <h1 className="mt-1 text-center">{user.fullName}</h1>
           </>
