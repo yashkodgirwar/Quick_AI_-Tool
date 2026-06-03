@@ -8,15 +8,12 @@ const AiTools = () => {
   const user=useUser()
 
   return (
-    <div className="px-4 sm:px-20 xl:px-32 my-24">
+    <div className="px-4 sm:px-20 xl:px-32 my-1 mt-1">
     
       <div className="text-center">
     <h2
-  className="text-[42px] font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-  style={{
-    backgroundSize: "200% 200%",
-    animation: "gradientShift 4s ease infinite",
-  }}
+className="text-[42px] font-semibold text-black   "
+ 
 >
   Powerful AI Tools
 </h2>
