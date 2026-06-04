@@ -8,3 +8,16 @@
 @theme{
   --color-primary:#5044E5;
 }
+
+.reset-tw, .reset-tw *{
+  all:revert !important;
+}
+.cl-drawerRoot-sidebar {
+  position: fixed;   /* must be positioned for z-index to work */
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 400px;
+  background: #fff;
+  z-index: 50;       /* Higher than navbar */
+}
