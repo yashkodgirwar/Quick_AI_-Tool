@@ -8,6 +8,7 @@ const GenerateImages = () => {
 'Fantasy style', 'Realistic style', '3D style', 'Portrait style']
     const [selectedStyle, setselectedStyle] = useState('General');
     const [input, setInput] = useState('');
+    const [publish,setPublish] =useState(false);
    
     const onsubmitHandler = async (e) => {
       e.preventDefault();
@@ -22,10 +23,10 @@ const GenerateImages = () => {
           <h1 className='text-xl font-semibold '>AI Iamge Generator</h1>
         </div>
         <p className='mt-5 text-sm font-medium '>
-          Keyword
+          Describe Your Image
         </p>
 
-        <textarea onChange={(e) => setInput(e.target.value)} value={input} type='text' className='w-full p-2 mt-3 outline-none text-sm rounded-md border border-gray-300 mb-2' placeholder='Describe what you want to see in the image' required />
+        <textarea onChange={(e) => setInput(e.target.value)} rows={4} value={input} type='text' className='w-full p-2 mt-3 outline-none text-sm rounded-md border border-gray-300 mb-2' placeholder='Describe what you want to see in the image' required />
         <p className='mt-4 text-sm font-medium'>Style</p>
         <div className="mt-3 flex gap-3 flex-wrap sm:max-w-[82%]">
           {imageStyle.map((item) => (
@@ -33,7 +34,7 @@ const GenerateImages = () => {
               onClick={() => setselectedStyle(item)}
               key={item}
               className={`text-xs px-4 py-1 border rounded-full cursor-pointer ${selectedStyle=== item
-                  ? "bg-blue-50 text-blue-700 border-blue-300"
+                  ? "bg-green-50 text-green-700 border-blue-300"
                   : "text-gray-500 border-gray-300"
                 }`}
             >
@@ -41,6 +42,25 @@ const GenerateImages = () => {
             </span>
           ))}
         </div>
+        <div className="my-6 flex items-center gap-2">
+  <label className="relative cursor-pointer">
+    <input
+      type="checkbox"
+      onChange={(e) => setPublish(e.target.checked)}
+      checked={publish}
+      className="sr-only peer"
+    />
+
+    <div className="w-9 h-5 bg-slate-300 rounded-full peer-checked:bg-green-500 transition">
+      <span
+        className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition
+                   peer-checked:translate-x-4"
+      ></span>
+    </div>
+  </label>
+  <p className="text-sm">Make this image Public</p>
+</div>
+
         <br />
         <button
           className="w-full flex justify-center items-center gap-2
