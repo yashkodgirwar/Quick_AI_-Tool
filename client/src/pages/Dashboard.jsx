@@ -42,7 +42,7 @@ const Dashboard = () => {
       </div>
 
      <div className='space-y-3 mt-10'>
-      <p clasName='mt-6 mb-4'>Recent Creation</p>
+      <p className='mt-6 mb-4'>Recent Creation</p>
       {
         creation.map((item)=> <Creationitems key={item.id} item={item}/>)
       }
