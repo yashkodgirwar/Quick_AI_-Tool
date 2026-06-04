@@ -22,13 +22,13 @@ const WriteArticle = () => {
       <form onSubmit={onsubmitHandler} className='w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200 outline'>
         <div className='flex items-center gap-3'>
           <Sparkles className='w-6 text-[#4A7AFF]' />
-          <h1 className='text-xl font-semibold '>ArticleConfiguration</h1>
+          <h1 className='text-xl font-semibold '>Article Configuration</h1>
         </div>
         <p className='mt-5 text-sm font-medium '>
           Article Topic
         </p>
 
-        <input onChange={(e) => setInput(e.target.value)} value={input} type='text' className='w-full p-2 mt-3 outline-none text-sm rounded-md border border-gray-300 mb-2' placeholder='the future of artificial intelligence is...' required />
+        <input onChange={(e) => setInput(e.target.value)} value={input} type='text' className='w-full p-2 mt-3 outline-none text-sm rounded-md border border-gray-300 mb-2' placeholder='Describe the article title here...' required />
         <p className='mt-4 text-sm font-medium'>Article Length</p>
         <div className="mt-3 flex gap-3 flex-wrap sm:max-w-[82%]">
           {articleLength.map((item, index) => (

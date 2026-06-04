@@ -19,13 +19,13 @@ const BlogTitles = () => {
       <form onSubmit={onsubmitHandler} className='w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200 outline'>
         <div className='flex items-center gap-3'>
           <Sparkles className='w-6 text-[#8E37EB]' />
-          <h1 className='text-xl font-semibold '></h1>
+          <h1 className='text-xl font-semibold '>AI Blog Titles Generator</h1>
         </div>
         <p className='mt-5 text-sm font-medium '>
           Keyword
         </p>
 
-        <input onChange={(e) => setInput(e.target.value)} value={input} type='text' className='w-full p-2 mt-3 outline-none text-sm rounded-md border border-gray-300 mb-2' placeholder='the future of artificial intelligence is...' required />
+        <input onChange={(e) => setInput(e.target.value)} value={input} type='text' className='w-full p-2 mt-3 outline-none text-sm rounded-md border border-gray-300 mb-2' placeholder='Describe the title...' required />
         <p className='mt-4 text-sm font-medium'>Category</p>
         <div className="mt-3 flex gap-3 flex-wrap sm:max-w-[82%]">
           {blogCategories.map((item) => (

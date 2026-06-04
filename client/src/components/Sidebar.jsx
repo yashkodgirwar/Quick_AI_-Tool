@@ -1,10 +1,7 @@
 import { SignIn, useUser,  useClerk } from "@clerk/react";
 
 import { NavLink } from 'react-router-dom'
-import { assets } from '../assets/assets'   
-
 import { House, SquarePen, Hash, Image, Eraser, Scissors, FileText, Users, LogOut } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 
@@ -22,7 +19,6 @@ const navItems = [
 const Sidebar = () => {
   const { user } = useUser();
   const [sidebar,setSidebar]=useState(false)
-  const navigate = useNavigate()
   const {signOut,openUserProfile}=useClerk()
 
   return user ? (
