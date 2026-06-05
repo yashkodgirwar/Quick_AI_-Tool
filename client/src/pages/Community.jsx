@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import {useEffect,useState} from 'react'
+import React, { useState, useEffect } from 'react'
+import { useUser } from '@clerk/react'
+import { Heart } from 'lucide-react'
 import {dummyPublishedCreationData} from '../assets/assets'
 
 const Community = () => {

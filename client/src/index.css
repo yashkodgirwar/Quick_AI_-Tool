@@ -19,5 +19,10 @@
   height: 100%;
   width: 400px;
   background: #fff;
-  z-index: 50;       /* Higher than navbar */
+  z-index: 99999 !important;       /* Higher than navbar (z-40) and other headers */
+}
+
+/* Ensure all Clerk portals/modals/drawers sit on top of the fixed navbar */
+.cl-portal {
+  z-index: 99999 !important;
 }

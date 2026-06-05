@@ -4,8 +4,8 @@ import { useState } from 'react'
 
 const RemoveObject = () => {
 
- const [input, setInput] = useState('');
-   const [object, setobject] = useState('');
+  const [input, setInput] = useState('');
+  const [object, setobject] = useState('');
 
   const onsubmitHandler = async (e) => {
     e.preventDefault();

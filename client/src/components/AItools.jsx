@@ -45,7 +45,7 @@ className="text-[42px] font-semibold text-black   "
           <div
             key={index}
             className=" outline-1 p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-            onClick={() => user && navigate(tool.path)}
+            onClick={() => navigate(tool.path)}
           >
     
             <tool.Icon
