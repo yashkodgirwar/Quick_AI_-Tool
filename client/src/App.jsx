@@ -10,9 +10,15 @@ import RemoveBackground from './pages/RemoveBackground'
 import RemoveObject from './pages/RemoveObject'
 import Community from './pages/Community'
 import ReviewResume from './pages/ReviewResume'
+import { useAuth } from '@clerk/react'
+import { useEffect } from 'react'
 
 
 const App = () => {
+const {getToken} =useAuth()
+useEffect(()=>{
+getToken().then((token)=>console.log(token));
+},[])
 
   return (
     <div>
