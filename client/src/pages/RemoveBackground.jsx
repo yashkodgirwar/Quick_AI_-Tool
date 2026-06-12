@@ -1,14 +1,41 @@
 import React from 'react'
 import { Edit, Sparkles, Hash, Eraser } from 'lucide-react'
 import { useState } from 'react'
+import { getToken, useAuth } from '@clerk/react';
+import axios from "axios"
+import toast from 'react-hot-toast';
+
+axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
 
 const RemoveBackground = () => {
 
 
   const [file, setFile] = useState(null);
+     const [loading,setLoading] =useState(false);
+     const[content,setContent]=useState('')
+
+      const {gettoken}=useAuth()
 
   const onsubmitHandler = async (e) => {
     e.preventDefault();
+     try{
+      setLoading(true)
+      const formData =new formData()
+      formData.append('image',input)
+      const data=await axios.post('/api/ai/remove-image-background',formData,{
+        headers:{Authorization:`Bearer ${await getToken()}`}
+      })
+
+      if(data.success){
+        setContent(data.content)
+      }else{
+        toast.error(data.message)
+      }
+    }catch(error){
+      toast.error(error.message)
+    }
+    setLoading(false);
+  }
   }
   return (
     <div className='h-full  overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700 '>
@@ -26,12 +53,12 @@ const RemoveBackground = () => {
         <p className='mt-4 text-sm font-medium'>Support JPG, PNG and other image formats</p>
 
 
-        <button
+        <button disabled={loading}
           className="w-full flex justify-center items-center gap-2
   bg-gradient-to-r from-[#FF9688] to-[#FF4938] text-white px-4 py-2 mt-6
   text-sm rounded-lg cursor-pointer transition-transform duration-200 hover:scale-105 shadow-md"
         >
-          <Eraser className="w-5" />
+         {loading ? <span className="w-4 h-4 my-1 rounded-full border-2 border-t-transparent animate-spin"></span> :   <Eraser className="w-5" />}
           Remove Background
         </button>
 
@@ -45,13 +72,19 @@ border-gray-200 min-h-[24rem] ">
           <Eraser className="w-5 h-5 text-[#FF4938]" />
           <h1 className="text-xl font-semibold">Processed Image</h1>
         </div>
-
-        <div className="flex-1 flex justify-center items-center">
+       
+               { !content ?
+               (<div className="flex-1 flex justify-center items-center">
           <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
             <Hash className="w-9 h-9" />
             <p>Upload an image and click "Remove background" to get started</p>
           </div>
-        </div>
+        </div>):(
+          <div>
+            <img src={content} alt="image" className='mt-3 w-full h-full'></img>
+          </div>
+        )}      
+        
       </div>
 
 
@@ -62,6 +95,6 @@ border-gray-200 min-h-[24rem] ">
     </div>
 
   )
-}
+
 
 export default RemoveBackground
