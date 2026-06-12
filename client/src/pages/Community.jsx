@@ -1,21 +1,59 @@
 import React, { useState, useEffect } from 'react'
 import { useUser } from '@clerk/react'
-import { Heart } from 'lucide-react'
+import { Car, Heart } from 'lucide-react'
 import {dummyPublishedCreationData} from '../assets/assets'
+import axios from "axios"
+import toast from 'react-hot-toast';
+import Markdown from 'react-markdown';
+
+
+axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
 
 const Community = () => {
   const [creations,setCreations] =useState([])
   const {user} =useUser()
+   const [loading,setLoading] =useState(true);
+
+     const {gettoken}=useAuth()
 
   const fetchCreation= async ()=>{
-    setCreations(dummyPublishedCreationData)
+   try{
+    const {data}= await axios.get('/api/user/get-published-creation',{
+      headers:{Authorization : `Bearer ${await getToken()}`}
+    })
+    if(data.success){
+        setContent(data.content)
+      }else{
+        toast.error(data.message)
+      }
+    }catch(error){
+      toast.error(error.message)
+    }
+    setLoading(false);
+  }
+
+  const imagelikeToggle=(id)=>{
+    try{
+    const {data}= await axios.post('/api/user/toggle-like-creation',{
+      headers:{Authorization : `Bearer ${await getToken()}`}
+    })
+     if(data.success){
+      toast.success(data.message)
+      await fetchCreation()
+     }else{
+      toast.error(data.message)
+     }
+    setLoading(false);
+  }catch(error){
+          toast.error(error.message)
+
   }
   useEffect(()=>{
       if(user){
         fetchCreation()
       }
   },[user])
-  return (
+  return !loading ? (
     <div className="bg-white h-full w-full rounded-xl overflow-y-scroll">
   {creations.map((creation, index) => (
     <div
@@ -37,7 +75,7 @@ const Community = () => {
         <p className="text-sm hidden group-hover:block">{creation.prompt}</p>
         <div className="flex gap-1 items-center">
           <p>{creation.likes.length}</p>
-          <Heart
+          < Heart onClick={()=>imagelikeToggle(creation.id)}
             className={`min-w-5 h-5 hover:scale-110 cursor-pointer 
               ${creation.likes.includes(user.id) 
                 ? 'fill-red-500 text-red-600' 
@@ -49,7 +87,12 @@ const Community = () => {
   ))}
 </div>
 
+  ):(
+    <div className='flex justify-center items-center h-full'>
+<span className='w-10 h-10 my-1 rounded-full border-3
+border-primary border-t-transparent animate-spin'></span>
+</div>
   )
 }
-
+}
 export default Community

@@ -36,7 +36,7 @@ const RemoveBackground = () => {
     }
     setLoading(false);
   }
-  }
+  
   return (
     <div className='h-full  overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700 '>
       {/* left col  */}
@@ -96,5 +96,5 @@ border-gray-200 min-h-[24rem] ">
 
   )
 
-
+}
 export default RemoveBackground
