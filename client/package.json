@@ -12,9 +12,11 @@
   "dependencies": {
     "@clerk/react": "^6.7.2",
     "@tailwindcss/vite": "^4.3.0",
+    "axios": "^1.17.0",
     "lucide-react": "^1.17.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-hot-toast": "^2.6.0",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.16.0",
     "tailwindcss": "^4.3.0"
