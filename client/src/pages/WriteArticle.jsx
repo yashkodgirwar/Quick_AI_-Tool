@@ -4,6 +4,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '@clerk/react';
 import Markdown from 'react-markdown';
+import {Toaster} from 'react-hot-toast'
 
 axios.defaults.baseURL=import.meta.env.VITE_BASE_URL;
 
@@ -29,7 +30,7 @@ const WriteArticle = () => {
       setLoading(true)
       const prompt=`Write an article about ${input} in ${selectedlength.text}`
       const data=await axios.post('/api/ai/generate-article',{prompt,lenght:selectedlength.length},{
-        headers:{Authorization:`Bearer ${await get}`}
+        headers:{Authorization:`Bearer ${await getToken()}`}
       })
 
       if(data.success){
@@ -37,6 +38,7 @@ const WriteArticle = () => {
       }else{
         toast.error(data.message)
       }
+    
     }catch(error){
       toast.error(error.message)
     }
