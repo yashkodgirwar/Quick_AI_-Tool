@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Markdown from 'react-markdown';
-import { ChevronDown, ChevronUp, Image, BookOpen, Sparkles, FileText } from 'lucide-react';
+import { ChevronDown, ChevronUp, Image, BookOpen, Sparkles, FileText, Trash2 } from 'lucide-react';
 
-const CreationItem = ({ item }) => {
+const CreationItem = ({ item, onDelete }) => {
   const [expanded, setExpanded] = useState(false);
 
   // Define styling map based on creation type
@@ -62,6 +62,18 @@ const CreationItem = ({ item }) => {
             {currentConfig.icon}
             <span>{currentConfig.label}</span>
           </div>
+          {onDelete && (
+            <button 
+              className="text-slate-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 transition-all cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(item.id);
+              }}
+              title="Delete Creation"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          )}
           <div className="text-slate-400 hover:text-slate-600 transition-colors">
             {expanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
           </div>
