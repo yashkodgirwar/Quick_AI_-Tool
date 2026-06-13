@@ -31,6 +31,25 @@ const Dashboard = () => {
     setLoading(false);
   }
 
+  const handleDeleteCreation = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this creation?")) {
+      return;
+    }
+    try {
+      const { data } = await axios.post('/api/user/delete-creation', { id }, {
+        headers: { Authorization: `Bearer ${await getToken()}` }
+      })
+      if (data.success) {
+        toast.success(data.message || "Creation deleted successfully")
+        setCreation(prev => prev.filter(item => item.id !== id))
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   useEffect(() => {
     if (user) {
       getDashBoard()
@@ -115,7 +134,7 @@ const Dashboard = () => {
         ) : (
           <div className='space-y-4 max-w-5xl'>
             {creation.map((item) => (
-              <Creationitems key={item.id} item={item} />
+              <Creationitems key={item.id} item={item} onDelete={handleDeleteCreation} />
             ))}
           </div>
         )}
