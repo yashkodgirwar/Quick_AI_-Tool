@@ -4,10 +4,12 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { X, Menu } from 'lucide-react'
 import { useUser, SignIn } from '@clerk/react'
 import Sidebar from '../components/Sidebar'
+import FeedbackModal from '../components/FeedbackModal'
 
 const Layout = () => {
     const navigate = useNavigate()
     const [sidebar, setSidebar] = useState(false)
+    const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
     const { user, isLoaded } = useUser()
 
     // Reload user metadata to ensure we show the latest subscription plan
@@ -51,11 +53,12 @@ const Layout = () => {
             }
         </nav>
         <div className='flex w-full h-[calc(100vh-56px)] relative'>
-            <Sidebar sidebar={sidebar} setSidebar={setSidebar}/>
+            <Sidebar sidebar={sidebar} setSidebar={setSidebar} onOpenFeedback={() => setIsFeedbackOpen(true)}/>
             <div className='flex-1 bg-[#F4F7FB] overflow-y-auto'>
                 <Outlet/>
             </div>
         </div>
+        <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
     </div>
   )
 }
