@@ -2,62 +2,55 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiToolsData } from '../assets/assets'; 
 import { useUser } from '@clerk/react';
+import { ArrowRight } from 'lucide-react';
 
 const AiTools = () => {
   const navigate = useNavigate();
-  const user=useUser()
+  const user = useUser();
 
   return (
-    <div className="px-4 sm:px-20 xl:px-32 my-1 mt-1">
+    <div className="px-4 sm:px-20 xl:px-32 my-12">
     
-      <div className="text-center">
-    <h2
-className="text-[42px] font-semibold text-black   "
- 
->
-  Powerful AI Tools
-</h2>
-
-<style>
-{`
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes shadowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(241, 25, 14, 0.6); }
-  50% { box-shadow: 0 0 40px rgba(72, 80, 236, 0.8); }
-}
-`}
-</style>
-
-        <p className="text-gray-500 max-w-lg mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-slate-800 tracking-tight mb-4">
+          Powerful AI Tools
+        </h2>
+        <p className="text-slate-500 max-w-lg mx-auto font-medium text-sm sm:text-base leading-relaxed">
           Everything you need to create, enhance, and optimize your content with
           cutting-edge AI technology.
         </p>
       </div>
 
-      
-      <div className="flex flex-wrap mt-10 justify-center">
+      <div className="flex flex-wrap mt-10 justify-center gap-4">
         {AiToolsData.map((tool, index) => (
           <div
             key={index}
-            className=" outline-1 p-8 m-4 max-w-xs rounded-lg bg-[#FDFDFE] shadow-lg border border-gray-100 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            className="group relative p-8 w-full sm:w-[300px] rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:border-indigo-500/20 hover:shadow-[0_20px_50px_rgba(79,70,229,0.08)] hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer flex flex-col items-start"
             onClick={() => navigate(tool.path)}
           >
-    
+            {/* Soft background glow on card hover */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+
             <tool.Icon
-              className="w-12 h-12 p-3 text-white rounded-xl"
+              className="w-12 h-12 p-3 text-white rounded-xl shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
               style={{
-                background: `linear-gradient(to bottom, ${tool.bg.from}, ${tool.bg.to})`,
+                background: `linear-gradient(135deg, ${tool.bg.from}, ${tool.bg.to})`,
               }}
             />
-            <h3 className="mt-6 mb-3 text-lg font-semibold">{tool.title}</h3>
-            <p className="text-gray-400 text-sm max-w-[95%]">
+            
+            <h3 className="mt-6 mb-2 text-lg font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">
+              {tool.title}
+            </h3>
+            
+            <p className="text-slate-400 text-sm leading-relaxed max-w-[95%]">
               {tool.description}
             </p>
+
+            {/* Sliding explore CTA indicator */}
+            <div className="flex items-center gap-1 text-xs font-semibold text-indigo-600 mt-6 opacity-0 translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+              <span>Try Tool</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </div>
           </div>
         ))}
       </div>
