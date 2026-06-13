@@ -51,3 +51,31 @@ export const togglelikeCration=async (req,res)=>{
         res.json({success:false, message:error.message});
     }
 }
+
+export const deleteCreation=async (req,res)=>{
+    try{
+        const {userId}=req.auth();
+        const {id}=req.body;
+
+        if(!id){
+            return res.json({success:false, message:"Creation ID is required"});
+        }
+
+        const [creation] = await sql`SELECT * FROM creations WHERE id = ${id}`;
+
+        if(!creation){
+            return res.json({success:false, message:"Creation not found"});
+        }
+
+        if(creation.user_id !== userId){
+            return res.json({success:false, message:"Unauthorized to delete this creation"});
+        }
+
+        await sql`DELETE FROM creations WHERE id = ${id}`;
+
+        res.json({success:true, message:"Creation deleted successfully"});
+    }catch(error){
+        console.error(error);
+        res.json({success:false, message:error.message});
+    }
+}
