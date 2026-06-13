@@ -19,7 +19,7 @@ app.get('/',(req,res)=>{
 })
 const port=process.env.port || 3000
 app.use('/api/ai',aiRouter)
-app.use('api/user',userRouter)
+app.use('/api/user',userRouter)
 
 app.listen(port,()=>{
     console.log(`
