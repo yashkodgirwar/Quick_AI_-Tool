@@ -10,44 +10,63 @@ const CreationItem = ({ item, onDelete }) => {
     'image': {
       label: 'Image',
       badgeClass: 'bg-green-50 text-green-700 border-green-200',
-      icon: <Image className="w-4 h-4 text-green-600" />
+      icon: <Image className="w-4 h-4 text-green-600" />,
+      accentBg: 'bg-green-500',
+      hoverBorder: 'hover:border-green-300 hover:shadow-green-500/5'
     },
     'article': {
       label: 'Article',
       badgeClass: 'bg-blue-50 text-blue-700 border-blue-200',
-      icon: <BookOpen className="w-4 h-4 text-blue-600" />
+      icon: <BookOpen className="w-4 h-4 text-blue-600" />,
+      accentBg: 'bg-blue-500',
+      hoverBorder: 'hover:border-blue-300 hover:shadow-blue-500/5'
     },
     'blog-title': {
       label: 'Blog Titles',
       badgeClass: 'bg-purple-50 text-purple-700 border-purple-200',
-      icon: <Sparkles className="w-4 h-4 text-purple-600" />
+      icon: <Sparkles className="w-4 h-4 text-purple-600" />,
+      accentBg: 'bg-purple-500',
+      hoverBorder: 'hover:border-purple-300 hover:shadow-purple-500/5'
     },
     'resume-review': {
       label: 'Resume Review',
       badgeClass: 'bg-rose-50 text-rose-700 border-rose-200',
-      icon: <FileText className="w-4 h-4 text-rose-600" />
+      icon: <FileText className="w-4 h-4 text-rose-600" />,
+      accentBg: 'bg-rose-500',
+      hoverBorder: 'hover:border-rose-300 hover:shadow-rose-500/5'
     }
   };
 
   const currentConfig = typeConfig[item.type] || {
     label: item.type,
     badgeClass: 'bg-slate-50 text-slate-700 border-slate-200',
-    icon: <Sparkles className="w-4 h-4 text-slate-600" />
+    icon: <Sparkles className="w-4 h-4 text-slate-600" />,
+    accentBg: 'bg-indigo-500',
+    hoverBorder: 'hover:border-indigo-300 hover:shadow-indigo-500/5'
   };
 
   return (
     <div
-      className={`border rounded-2xl cursor-pointer bg-white transition-all duration-300 ${
+      className={`group relative overflow-hidden border rounded-2xl cursor-pointer bg-white transition-all duration-300 ${
         expanded 
           ? 'border-slate-300 shadow-md ring-1 ring-slate-100' 
-          : 'border-slate-200/80 shadow-sm hover:border-slate-300 hover:shadow-md hover:-translate-y-0.5'
+          : `border-slate-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 ${currentConfig.hoverBorder}`
       }`}
       onClick={() => setExpanded(!expanded)} 
     >
+      {/* Dynamic left accent bar */}
+      <div 
+        className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${currentConfig.accentBg} ${
+          expanded ? 'h-full opacity-100' : 'h-0 opacity-0 group-hover:h-full group-hover:opacity-100'
+        }`} 
+      />
+
       {/* Header element */}
-      <div className="p-5 flex justify-between items-center gap-6">
+      <div className="p-5 pl-6 flex justify-between items-center gap-6">
         <div className="space-y-1.5 flex-1 min-w-0">
-          <h3 className="text-sm font-semibold text-slate-800 truncate pr-4">{item.prompt}</h3>
+          <h3 className="text-sm font-semibold text-slate-800 truncate pr-4 group-hover:text-slate-900 transition-colors">
+            {item.prompt}
+          </h3>
           <p className="text-xs text-slate-400 font-medium">
             {new Date(item.created_at).toLocaleDateString(undefined, { 
               year: 'numeric', 
@@ -58,7 +77,7 @@ const CreationItem = ({ item, onDelete }) => {
         </div>
         
         <div className="flex items-center gap-3 shrink-0">
-          <div className={`flex items-center gap-1.5 px-3 py-1 border text-xs font-semibold rounded-full ${currentConfig.badgeClass}`}>
+          <div className={`flex items-center gap-1.5 px-3 py-1 border text-xs font-semibold rounded-full transition-transform duration-300 group-hover:scale-102 ${currentConfig.badgeClass}`}>
             {currentConfig.icon}
             <span>{currentConfig.label}</span>
           </div>
@@ -74,7 +93,7 @@ const CreationItem = ({ item, onDelete }) => {
               <Trash2 className="w-4 h-4" />
             </button>
           )}
-          <div className="text-slate-400 hover:text-slate-600 transition-colors">
+          <div className="text-slate-400 group-hover:text-slate-600 transition-colors">
             {expanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
           </div>
         </div>
