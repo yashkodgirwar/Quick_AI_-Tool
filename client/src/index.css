@@ -12,17 +12,36 @@
 .reset-tw, .reset-tw *{
   all:revert !important;
 }
+/* Custom styling for Clerk components to ensure modals, drawers, and checkout overlays always render on top of the fixed navbar */
 .cl-drawerRoot-sidebar {
-  position: fixed;   /* must be positioned for z-index to work */
+  position: fixed;
   right: 0;
   top: 0;
   height: 100%;
   width: 400px;
   background: #fff;
-  z-index: 99999 !important;       /* Higher than navbar (z-40) and other headers */
+  z-index: 99999 !important;
 }
 
-/* Ensure all Clerk portals/modals/drawers sit on top of the fixed navbar */
-.cl-portal {
+.cl-portal,
+.cl-modal,
+.cl-modalRoot,
+.cl-drawer,
+.cl-drawerRoot,
+.cl-billingPortal,
+.cl-billingPortalRoot,
+.cl-checkout,
+.cl-checkout-container,
+.cl-checkoutContainer,
+.cl-pricingTable-checkout,
+.cl-pricingTableCheckout,
+.cl-pricingTableCheckout-sidebar,
+.cl-checkoutPortal,
+.cl-checkoutPortalRoot,
+div[class*="cl-"][class*="portal"],
+div[class*="cl-"][class*="drawer"],
+div[class*="cl-"][class*="modal"],
+div[class*="cl-"][class*="checkout"],
+div[class*="cl-"][class*="billing"] {
   z-index: 99999 !important;
 }
