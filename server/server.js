@@ -17,7 +17,7 @@ app.use(clerkMiddleware())
 app.get('/',(req,res)=>{
     res.send('Server is alive')
 })
-const port=process.env.port || 3000
+const port = process.env.PORT || process.env.port || 3000
 app.use('/api/ai',aiRouter)
 app.use('/api/user',userRouter)
 
